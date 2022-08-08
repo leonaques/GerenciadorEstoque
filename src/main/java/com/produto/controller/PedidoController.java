@@ -32,7 +32,7 @@ public class PedidoController {
 
     @GetMapping("/id/{id}")
     public String buscaPedido(@PathVariable(name = "id") int id) {
-        String sql = "select NAME from REQUEST where REQUEST_ID =" + id;
+        String sql = "select (DESCRIPTION, PRICE) from REQUEST where REQUEST_ID =" + id;
 
         String retorno;
 
