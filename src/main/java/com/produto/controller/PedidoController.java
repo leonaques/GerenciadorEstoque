@@ -6,6 +6,9 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/pedido")
 public class PedidoController {
@@ -18,9 +21,9 @@ public class PedidoController {
 
         String sql = new StringBuilder()
                 .append("INSERT INTO REQUEST (DESCRIPTION, PRICE) VALUES ('")
-                .append(pedido.descricao)
+                .append(pedido.description)
                 .append("',")
-                .append(pedido.preco)
+                .append(pedido.price)
                 .append(")")
                 .toString();
 
@@ -32,13 +35,19 @@ public class PedidoController {
 
     @GetMapping("/id/{id}")
     public String buscaPedido(@PathVariable(name = "id") int id) {
-        String sql = "select (DESCRIPTION, PRICE) from REQUEST where REQUEST_ID =" + id;
+        String sql = "select DESCRIPTION, PRICE from REQUEST where REQUEST_ID =" + id;
 
-        String retorno;
+        String retorno = "";
 
         try {
-            retorno = "Descricao do pedido = ";
-            retorno += jdbc.queryForObject(sql, String.class);
+            List<Map<String, Object>> queryReturn = jdbc.queryForList(sql);
+
+            for (Map<String, Object> map:queryReturn) {
+                retorno = "Descricao do pedido = ";
+                retorno += map.get("description");
+                retorno += ("/ Preço do produto = ");
+                retorno += map.get("PRICE");
+            }
         } catch (EmptyResultDataAccessException e) {
             retorno = "O pedido informado nao existe!";
         }
@@ -57,6 +66,29 @@ public class PedidoController {
         }
 
         return "Pedido com id " + id + " deletado com sucesso";
+    }
+
+    @GetMapping
+    public String buscaTotal() {
+        String sql = "select DESCRIPTION, PRICE from REQUEST";
+
+        String retorno = "";
+
+        try {
+            List<Map<String, Object>> queryReturn = jdbc.queryForList(sql);
+
+            for (Map<String, Object> map:queryReturn) {
+                retorno += "Descricao do pedido = ";
+                retorno += map.get("description");
+                retorno += ("/ Preço do produto = ");
+                retorno += map.get("PRICE");
+                retorno += ("\n");
+            }
+        } catch (EmptyResultDataAccessException e) {
+            retorno = "O pedido informado nao existe!";
+        }
+
+        return retorno;
     }
 
 }

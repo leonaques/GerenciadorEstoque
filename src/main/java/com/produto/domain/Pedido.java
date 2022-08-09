@@ -2,7 +2,7 @@ package com.produto.domain;
 
 public class Pedido {
 
-    public int id;
-    public String descricao;
-    public long preco;
+    public int requestId;
+    public String description;
+    public long price;
 }
