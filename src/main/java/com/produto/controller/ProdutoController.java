@@ -1,61 +1,41 @@
 package com.produto.controller;
 
-import com.produto.domain.Produto;
+import com.produto.domain.Product;
+import com.produto.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController()
 @RequestMapping("/produto")
 public class ProdutoController {
 
     @Autowired
-    private JdbcTemplate jdbc;
+    private ProductService productService;
 
     @PostMapping()
-    public String criarProduto(@RequestBody Produto produto) {
-
-        String sql = new StringBuilder()
-                .append("INSERT INTO PRODUCT (NAME, PRICE) VALUES ('")
-                .append(produto.nome)
-                .append("',")
-                .append(produto.preco)
-                .append(")")
-                .toString();
-
-        jdbc.execute(sql);
+    public String createProduct(@RequestBody Product product) {
+        this.productService.save(product);
 
         return "Registro inserido com sucesso";
 
     }
 
     @GetMapping("/id/{id}")
-    public String buscaProduto(@PathVariable(name = "id") int id) {
-        String sql = "select NAME from PRODUCT where PRODUCT_ID =" + id;
+    public Product findProduct(@PathVariable(name = "id") int id) {
 
-        String retorno;
-
-        try {
-            retorno = "Nome do produto = ";
-            retorno += jdbc.queryForObject(sql, String.class);
-        } catch (EmptyResultDataAccessException e) {
-            retorno = "O produto informado nao existe!";
-        }
-
-        return retorno;
+        return this.productService.find(id);
     }
 
     @DeleteMapping("/id/{id}")
-    public String deletaProduto(@PathVariable(name = "id") int id) {
-        String sql = "DELETE FROM PRODUCT WHERE PRODUCT_ID = " + id;
+    public int deleteProduct(@PathVariable(name = "id") int id) {
+        return this.productService.delete(id);
 
-        int qtdDeletado = jdbc.update(sql);
+    }
 
-        if (qtdDeletado == 0) {
-            return "Produto nao encontrado!";
-        }
-
-        return "Produto com id " + id + " deletado com sucesso";
+    @GetMapping
+    public List<Product> findAllProducts() {
+        return this.productService.findAll();
     }
 }
