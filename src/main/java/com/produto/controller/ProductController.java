@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController()
 @RequestMapping("/produto")
-public class ProdutoController {
+public class ProductController {
 
     @Autowired
     private ProductService productService;
@@ -17,14 +17,11 @@ public class ProdutoController {
     @PostMapping()
     public String createProduct(@RequestBody Product product) {
         this.productService.save(product);
-
         return "Registro inserido com sucesso";
-
     }
 
     @GetMapping("/id/{id}")
     public Product findProduct(@PathVariable(name = "id") int id) {
-
         return this.productService.find(id);
     }
 
