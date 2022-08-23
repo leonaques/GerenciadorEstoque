@@ -1,9 +1,14 @@
 package com.produto.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.jetbrains.annotations.NotNull;
+
 public class Product {
 
     private int id;
+    @JsonProperty(required = true)
     private String name;
+    @JsonProperty(required = true)
     private long price;
 
     public  Product(int id, String name, long price) {
