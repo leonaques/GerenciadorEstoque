@@ -1,6 +1,9 @@
 package com.produto.dao;
 
 import com.produto.domain.Product;
+import com.produto.domain.Request;
+import com.produto.dto.ProductDetailsDto;
+import com.produto.dto.RequestDetailsDto;
 import com.produto.exception.QueryResultException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -31,6 +34,7 @@ public class ProductDAO {
 
         return product;
     }
+
 
     public Product find(int id) {
 
