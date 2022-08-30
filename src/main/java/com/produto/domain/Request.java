@@ -6,11 +6,11 @@ import java.util.List;
 
 public class Request {
 
-    public int requestId;
-    public String description;
-    public long price;
+    private int requestId;
+    private String description;
+    private long price;
 
-    public List<Product> products;
+    private List<Product> products;
 
     public  Request(int requestId, String description, long price) {
         this.setId(requestId);
@@ -18,9 +18,10 @@ public class Request {
         this.setPrice(price);
     }
 
-    public Request(RequestDetailsDto requestDetailsDto, long price) {
+    public Request(RequestDetailsDto requestDetailsDto, long price, List<Product> productList) {
         this.setDescription(requestDetailsDto.getDescription());
         this.setPrice(price);
+        this.setProductsList(productList);
     }
 
     public void setPrice(long price) {
@@ -50,7 +51,7 @@ public class Request {
         return price;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProductsList(List<Product> products) {
         this.products = products;
     }
 

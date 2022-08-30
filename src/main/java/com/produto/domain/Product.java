@@ -11,6 +11,8 @@ public class Product {
     @JsonProperty(required = true)
     private long price;
 
+    private int quantity;
+
     public  Product(int id, String name, long price) {
         this.setId(id);
         this.setName(name);
@@ -44,5 +46,13 @@ public class Product {
 
     public String getName() {
         return name;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

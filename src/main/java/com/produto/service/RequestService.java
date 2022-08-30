@@ -23,17 +23,18 @@ public class RequestService {
 
     public void createRequest(final RequestDetailsDto requestDetailsDto) {
 
-        long totalRequestPrice = 0;
-
-        List<Product> products = new ArrayList<>();
+        List<Product> productList = new ArrayList<>();
 
         for (ProductDetailsDto productDetailsDto : requestDetailsDto.getProducts()) {
             Product product = productService.find(productDetailsDto.getId());
+            product.setQuantity(productDetailsDto.getQuantity());
+            productList.add(product);
 
-            totalRequestPrice += productDetailsDto.getQuantity() * product.getPrice();
         }
 
-        Request request = new Request(requestDetailsDto, totalRequestPrice);
+        final var totalPrice = productList.stream().mapToLong(Product::getPrice).sum();
+
+        Request request = new Request(requestDetailsDto, totalPrice, productList);
 
         this.requestDAO.save(request);
 

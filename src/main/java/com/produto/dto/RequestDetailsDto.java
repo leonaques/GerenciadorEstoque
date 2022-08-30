@@ -10,6 +10,11 @@ public class RequestDetailsDto {
     @JsonProperty(value = "products")
     private List<ProductDetailsDto> products;
 
+    @JsonProperty(value = "costumer_id")
+    private long costumerId;
+
+    @JsonProperty(value = "address_id")
+    private long addressId;
     public void setDescription(String description) {
         this.description = description;
     }

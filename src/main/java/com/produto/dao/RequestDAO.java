@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -20,16 +22,30 @@ public class RequestDAO {
     private JdbcTemplate jdbc;
 
     public Request save(Request request) {
-        String sql = new StringBuilder()
+        String sqlInsertRequest = new StringBuilder()
                 .append("INSERT INTO REQUEST (DESCRIPTION, PRICE) VALUES ('")
                 .append(request.getDescription())
                 .append("',")
                 .append(request.getPrice())
                 .append(")")
+                .append(" returning REQUEST_ID")
                 .toString();
+        final int id = jdbc.queryForObject(sqlInsertRequest, Integer.class);
 
-        jdbc.execute(sql);
+        for (Product product: request.getProducts()) {
 
+            String sqlInsertProduct = new StringBuilder()
+                    .append("INSERT INTO PRODUCT_REQUEST (REQUEST_ID, PRODUCT_ID, QUANTITY) VALUES (")
+                    .append(id)
+                    .append(" , ")
+                    .append(product.getId())
+                    .append(" , ")
+                    .append(product.getQuantity())
+                    .append(")")
+                    .toString();
+
+            this.jdbc.execute(sqlInsertProduct);
+        }
         return request;
     }
 
