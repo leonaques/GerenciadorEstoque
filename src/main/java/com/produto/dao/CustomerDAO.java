@@ -5,12 +5,14 @@ import com.produto.domain.Product;
 import com.produto.exception.QueryResultException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public class CustomerDAO {
 
     @Autowired
@@ -44,7 +46,7 @@ public class CustomerDAO {
 
     public Customer find(int id) {
 
-        String sql = "select NAME, LAST_NAME, CPF from COSTUMER where COSTUMER_ID =" + id;
+        String sql = "select NAME, LAST_NAME, CPF from CUSTOMER where CUSTOMER_ID =" + id;
 
         List<Map<String, Object>> queryReturn = jdbc.queryForList(sql);
 

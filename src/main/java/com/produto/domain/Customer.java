@@ -1,6 +1,8 @@
 package com.produto.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Customer {
 
     private int id;
@@ -9,6 +11,7 @@ public class Customer {
 
     private String lastName;
 
+    @JsonProperty(required = true)
     private int cpf;
 
     public  Customer(int id, String name, String lastName, int cpf) {

@@ -35,7 +35,7 @@ public class RequestDAO {
         for (Product product: request.getProducts()) {
 
             String sqlInsertProduct = new StringBuilder()
-                    .append("INSERT INTO PRODUCT_REQUEST (REQUEST_ID, PRODUCT_ID, QUANTITY) VALUES (")
+                    .append("INSERT INTO PRODUCT_REQUEST (REQUEST_ID, PRODUCT_ID, ADDRESS_ID, QUANTITY) VALUES (")
                     .append(id)
                     .append(" , ")
                     .append(product.getId())

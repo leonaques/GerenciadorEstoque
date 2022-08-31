@@ -6,9 +6,9 @@ public class RequestResponseDto {
 
     private String description;
 
-    private CustomerDetailsDTO customerDetailsDTO;
+    private CustomerDetailsDto customerDetailsDTO;
 
-    private AddressDetailsDTO addressDetailsDTO;
+    private AddressDetailsDto addressDetailsDTO;
 
     private List<RequestResponseDto> products;
 }
