@@ -1,0 +1,20 @@
+1 - Criar CRUD de CUSTOMER
+    - Enpoints
+        - Inserir customer
+        - Deletar customer
+        - Buscar customer por CUSTOMER_ID
+        - Buscar todos os customer
+        - Bonus - Alterar customer
+
+2 - Criar CRUD de ADDRESS
+    - Enpoints
+        - Inserir ADDRESS
+        - Deletar ADDRESS
+        - Buscar ADDRESS por ADRESS_ID
+        - Buscar todos os ADDRESS
+        - Bonus - Alterar ADDRESS
+        - Bonus - Buscar todos ADDRESS por CUSTOMER_ID
+
+3 - Alterar o enpoint de cadastro de pedido para receber o ID do customer e do address e salvar nas tabelas de relacionamento
+
+4 - Bonus - Na busca dos detalhes do pedido, trazer os detalhes do cliente, os detalhes do endereco e a lista de produtos com quantidade

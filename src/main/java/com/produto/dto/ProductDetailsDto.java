@@ -1,7 +1,5 @@
 package com.produto.dto;
 
-import java.util.Set;
-
 public class ProductDetailsDto {
     private int id;
     private int quantity;

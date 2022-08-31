@@ -9,7 +9,6 @@ public class Request {
     private int requestId;
     private String description;
     private long price;
-
     private List<Product> products;
 
     public  Request(int requestId, String description, long price) {

@@ -21,6 +21,9 @@ public class Product {
 
     public Product(){}
 
+    public Product(int id, String name, String lastName, long cpf) {
+    }
+
     public void setId(int id) {
         this.id = id;
     }
