@@ -36,5 +36,11 @@ public class CustomerController {
     public List<Customer> findAllCustomers() {
         return this.customerService.findAll();
     }
+
+    @PostMapping("/update")
+    public String updateCustomer (@RequestBody Customer customer){
+        this.customerService.update(customer);
+        return "Cadastro alterado com sucesso!";
+    }
 }
 

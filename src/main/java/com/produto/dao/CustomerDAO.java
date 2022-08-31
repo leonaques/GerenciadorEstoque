@@ -34,7 +34,23 @@ public class CustomerDAO {
 
         return customer;
     }
+    public Customer update(Customer customer) {
 
+        String sql = new StringBuilder()
+                .append("UPDATE CUSTOMER SET NAME='")
+                .append(customer.getName())
+                .append("', LAST_NAME= '")
+                .append(customer.getLastName())
+                .append("', CPF= '")
+                .append(customer.getCpf())
+                .append("' WHERE CUSTOMER_ID = ")
+                .append(customer.getId())
+                .toString();
+
+        jdbc.execute(sql);
+
+        return customer;
+    }
     public int delete(int id) {
 
         String sql = "DELETE FROM CUSTOMER WHERE CUSTOMER_ID = " + id;

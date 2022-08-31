@@ -28,4 +28,6 @@ public class CustomerService {
     public List<Customer> findAll() {
         return this.customerDAO.findAll();
     }
+
+    public Customer update(Customer customer){return this.customerDAO.update(customer);}
 }
