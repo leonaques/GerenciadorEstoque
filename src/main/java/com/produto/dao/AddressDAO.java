@@ -1,6 +1,7 @@
 package com.produto.dao;
 
 import com.produto.domain.Address;
+import com.produto.domain.Customer;
 import com.produto.exception.QueryResultException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -87,6 +88,28 @@ public class AddressDAO {
         }
 
         return allAddress;
+    }
+
+    public Address update(Address address) {
+
+        String sql = new StringBuilder()
+                .append("UPDATE ADDRESS SET STREET='")
+                .append(address.getStreet())
+                .append("', NUMBER= '")
+                .append(address.getNumber())
+                .append("', DISTRICT= '")
+                .append(address.getDistrict())
+                .append("', COUNTRY= '")
+                .append(address.getCountry())
+                .append("', CEP= '")
+                .append(address.getCep())
+                .append("' WHERE CUSTOMER_ID = ")
+                .append(address.getId())
+                .toString();
+
+        jdbc.execute(sql);
+
+        return address;
     }
 
 

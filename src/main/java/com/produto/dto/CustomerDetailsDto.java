@@ -1,5 +1,7 @@
 package com.produto.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class CustomerDetailsDto {
 
     private int id;
@@ -7,8 +9,8 @@ public class CustomerDetailsDto {
     private String name;
 
     private String lastName;
-
-    private int cpf;
+    @JsonProperty(value = "cpf")
+    private double cpf;
 
     public int getId() {return id;}
 
@@ -22,7 +24,7 @@ public class CustomerDetailsDto {
 
     public void setLastName(String lastName) {this.lastName = lastName;}
 
-    public int getCpf() {return cpf;}
+    public double getCpf() {return cpf;}
 
-    public void setCpf(int cpf) {this.cpf = cpf;}
+    public void setCpf(double cpf) {this.cpf = cpf;}
 }

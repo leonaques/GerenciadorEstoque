@@ -25,7 +25,7 @@ public class AddressService {
         return this.addressDAO.find(id);
     }
 
-    public List<Address> findAll() {
-        return this.addressDAO.findAll();
-    }
+    public List<Address> findAll() {return this.addressDAO.findAll();}
+
+    public Address update(Address address){return this.addressDAO.update(address);}
 }

@@ -34,4 +34,9 @@ public class AddressController {
     public List<Address> findAllAddress() {
         return this.addressService.findAll();
     }
+    @PostMapping("/update")
+    public String updateAddress(@RequestBody Address address) {
+        this.addressService.update(address);
+        return "Endereço alterado com sucesso!";
+    }
 }

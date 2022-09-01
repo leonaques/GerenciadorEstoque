@@ -1,7 +1,6 @@
 package com.produto.dao;
 
 import com.produto.domain.Customer;
-import com.produto.domain.Product;
 import com.produto.exception.QueryResultException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,9 +24,9 @@ public class CustomerDAO {
                 .append(customer.getName())
                 .append("','")
                 .append(customer.getLastName())
-                .append("',")
+                .append("','")
                 .append(customer.getCpf())
-                .append(")")
+                .append("')")
                 .toString();
 
         jdbc.execute(sql);
@@ -74,12 +73,13 @@ public class CustomerDAO {
 
         String name = objectReturn.get("NAME").toString();
         String lastName = objectReturn.get("LAST_NAME").toString();
-        var cpf = ((BigDecimal) objectReturn.get("CPF")).longValue();
+        double cpf = (Double) (objectReturn.get("CPF"));
 
-        var customer = new Customer(id, name, lastName, (int) cpf);
+        var customer = new Customer(id, name, lastName, cpf);
 
-        return new Customer(id, name, lastName, (int) cpf);
+        return new Customer(id, name, lastName, cpf);
     }
+
 
     public List<Customer> findAll(){
         String sql = "select NAME, LAST_NAME, CUSTOMER_ID, CPF from CUSTOMER";
@@ -90,10 +90,11 @@ public class CustomerDAO {
         for (Map<String, Object> map:queryReturn) {
             String name = map.get("NAME").toString();
             String lastName = map.get("LAST_NAME").toString();
-            var cpf = ((BigDecimal) map.get("CPF")).longValue();
+            double cpf = (Double) map.get("CPF");
             int id = (Integer) map.get("CUSTOMER_ID");
-            var customer = new Customer(id, name, lastName, (int) cpf);
+            var customer = new Customer(id, name, lastName, cpf);
             customers.add(customer);
+
         }
 
         return customers;

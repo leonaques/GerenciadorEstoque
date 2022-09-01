@@ -54,7 +54,5 @@ public class Request {
         this.products = products;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
+    public List<Product> getProducts() {return products;}
 }

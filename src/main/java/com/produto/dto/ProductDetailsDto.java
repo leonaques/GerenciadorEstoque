@@ -2,6 +2,8 @@ package com.produto.dto;
 
 public class ProductDetailsDto {
     private int id;
+
+    private String description;
     private int quantity;
 
     public void setId(int id) {
@@ -19,4 +21,7 @@ public class ProductDetailsDto {
     public int getQuantity() {
         return quantity;
     }
+
+    public String getDescription() {return description;}
+
 }

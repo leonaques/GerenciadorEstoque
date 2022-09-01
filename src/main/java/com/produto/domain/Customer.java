@@ -11,10 +11,9 @@ public class Customer {
 
     private String lastName;
 
-    @JsonProperty(required = true)
-    private int cpf;
+    private double cpf;
 
-    public  Customer(int id, String name, String lastName, int cpf) {
+    public  Customer(int id, String name, String lastName, double cpf) {
         this.setId(id);
         this.setName(name);
         this.setLastName(lastName);
@@ -29,7 +28,7 @@ public class Customer {
 
     public String getLastName() {return lastName;}
 
-    public int getCpf() {return cpf;}
+    public double getCpf() {return cpf;}
 
     public void setId(int id) {this.id = id;}
 
@@ -37,5 +36,5 @@ public class Customer {
 
     public void setLastName(String lastName) {this.lastName = lastName;}
 
-    public void setCpf(int cpf) {this.cpf = cpf;}
+    public void setCpf(double cpf) {this.cpf = cpf;}
 }
