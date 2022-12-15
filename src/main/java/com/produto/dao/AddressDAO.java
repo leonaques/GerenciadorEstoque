@@ -124,7 +124,7 @@ public class AddressDAO {
 
         List<Address> allAddress = new ArrayList<>();
 
-        var objectReturn = queryReturn.get(Customer.);
+        var objectReturn = queryReturn.get(0);
         for (Map<String, Object> map:queryReturn) {
             String street = map.get("STREET").toString();
             var number = ((BigDecimal) map.get("NUMBER")).longValue();
