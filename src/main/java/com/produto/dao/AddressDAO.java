@@ -15,6 +15,8 @@ import java.util.Map;
 @Repository
 public class AddressDAO {
 
+
+
     @Autowired
     private JdbcTemplate jdbc;
 
@@ -31,8 +33,18 @@ public class AddressDAO {
                 .append(",")
                 .append(address.getCep())
                 .append(")")
+                .append("returning ADDRESS_ID")
                 .toString();
+        final int id = jdbc.queryForObject(sql, Integer.class);
+        jdbc.execute(sql);
 
+        sql = new StringBuilder()
+                .append("INSERT INTO CUSTOMER_ADDRESS (CUSTOMER_ID, ADDRESS_ID) VALUES ('")
+                .append(address.getCustomer().getId())
+                .append("','")
+                .append(address.getId())
+                .append("')")
+                .toString();
         jdbc.execute(sql);
 
         return address;
@@ -64,10 +76,45 @@ public class AddressDAO {
         String district = objectReturn.get("DISTRICT").toString();
         String country = objectReturn.get("COUNTRY").toString();
         var cep = ((BigDecimal) objectReturn.get("CEP")).longValue();
+        String customerName = objectReturn.get("c.name").toString();
+        String customerLastName = objectReturn.get("c.last_name").toString();
 
-        var address = new Address(id, (int) cep, street, (int) number, district, country);
+        var address = new Address(id, (int) cep, street, (int) number, district, country, customerName, customerLastName);
 
-        return new Address(id, (int) cep, street, (int) number, district, country);
+        return new Address(id, (int) cep, street, (int) number, district, country, customerName, customerLastName);
+    }
+
+    public Address findAddressCustomerId(int id) {
+
+        String sql = new StringBuilder()
+                .append("select  ca.customer_id, ca.address_id, c.name, c.last_name, a.STREET, a.NUMBER, a.DISTRICT, a.COUNTRY, a.CEP from customer_address ca " +
+                        "join  customer c on c.customer_id = ca.customer_id " +
+                        "join address a on a.address_id = ca.address_id" +
+                        " where c.customer_id =")
+                .append(findAddressCustomerId(id).getCustomer().getId())
+                .toString();
+
+
+        List<Map<String, Object>> queryReturn = jdbc.queryForList(sql);
+
+        if (queryReturn.size() != 1) {
+            throw new QueryResultException();
+        }
+
+        var objectReturn = queryReturn.get(0);
+
+        String street = objectReturn.get("STREET").toString();
+        var number = ((BigDecimal) objectReturn.get("NUMBER")).longValue();
+        String district = objectReturn.get("DISTRICT").toString();
+        String country = objectReturn.get("COUNTRY").toString();
+        var cep = ((BigDecimal) objectReturn.get("CEP")).longValue();
+        String customerName = objectReturn.get("c.name").toString();
+        String customerLastName = objectReturn.get("c.last_name").toString();
+
+
+        var address = new Address(id, (int) cep, street, (int) number, district, country, customerName, customerLastName);
+
+        return new Address(id, (int) cep, street, (int) number, district, country, customerName, customerLastName);
     }
 
     public List<Address> findAll(){
@@ -76,6 +123,8 @@ public class AddressDAO {
         List<Map<String, Object>> queryReturn = jdbc.queryForList(sql);
 
         List<Address> allAddress = new ArrayList<>();
+
+        var objectReturn = queryReturn.get(Customer.);
         for (Map<String, Object> map:queryReturn) {
             String street = map.get("STREET").toString();
             var number = ((BigDecimal) map.get("NUMBER")).longValue();
@@ -83,7 +132,9 @@ public class AddressDAO {
             String country = map.get("COUNTRY").toString();
             var cep = ((BigDecimal) map.get("CEP")).longValue();
             int id = (Integer) map.get("ADDRESS_ID");
-            var address = new Address(id, (int) cep, street, (int) number, district, country);
+            String customerName = objectReturn.get("c.name").toString();
+            String customerLastName = objectReturn.get("c.last_name").toString();
+            var address = new Address(id, (int) cep, street, (int) number, district, country, customerName, customerLastName);
             allAddress.add(address);
         }
 

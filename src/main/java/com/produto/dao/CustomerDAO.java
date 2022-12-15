@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +25,10 @@ public class CustomerDAO {
                 .append(customer.getLastName())
                 .append("','")
                 .append(customer.getCpf())
-                .append("')")
+                .append("');")
+                .append("INSERT INTO CUSTOMER_ADDRESS (CUSTOMER_ID) VALUES('")
+                .append(customer.getId())
+                .append("');")
                 .toString();
 
         jdbc.execute(sql);

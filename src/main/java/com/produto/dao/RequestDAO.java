@@ -33,7 +33,7 @@ public class RequestDAO {
         for (Product product: request.getProducts()) {
 
             String sqlInsertProduct = new StringBuilder()
-                    .append("INSERT INTO PRODUCT_REQUEST (REQUEST_ID, PRODUCT_ID, ADDRESS_ID, CUSTOMER_ID, QUANTITY) VALUES (")
+                    .append("INSERT INTO PRODUCT_REQUEST (REQUEST_ID, PRODUCT_ID, QUANTITY) VALUES (")
                     .append(id)
                     .append(" , ")
                     .append(product.getId())
@@ -44,6 +44,31 @@ public class RequestDAO {
 
             this.jdbc.execute(sqlInsertProduct);
         }
+
+
+            String sqlInsertAddress = new StringBuilder()
+                    .append("INSERT INTO REQUEST_ADDRESS (REQUEST_ID, ADDRESS_ID) VALUES (")
+                    .append(id)
+                    .append(" , ")
+                    .append(request.getAddresses().getId())
+                    .append(")")
+                    .toString();
+
+
+            this.jdbc.execute(sqlInsertAddress);
+
+
+            String sqlInsertCustomer = new StringBuilder()
+                    .append("INSERT INTO REQUEST_CUSTOMER (REQUEST_ID, CUSTOMER_ID) VALUES (")
+                    .append(id)
+                    .append(" , ")
+                    .append(request.getAddresses().getId())
+                    .append(")")
+                    .toString();
+
+            this.jdbc.execute(sqlInsertCustomer);
+
+
         return request;
     }
 

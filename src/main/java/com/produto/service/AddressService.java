@@ -2,8 +2,6 @@ package com.produto.service;
 
 import com.produto.dao.AddressDAO;
 import com.produto.domain.Address;
-import com.produto.domain.Customer;
-import com.produto.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +21,10 @@ public class AddressService {
 
     public Address find(int id) {
         return this.addressDAO.find(id);
+    }
+
+    public Address findAddressCustomerId(int id) {
+        return this.addressDAO.findAddressCustomerId(id);
     }
 
     public List<Address> findAll() {return this.addressDAO.findAll();}

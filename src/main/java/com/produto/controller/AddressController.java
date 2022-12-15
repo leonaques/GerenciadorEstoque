@@ -5,8 +5,6 @@ import com.produto.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/address")
 public class AddressController {
@@ -24,17 +22,18 @@ public class AddressController {
         return this.addressService.find(id);
     }
 
+    @GetMapping("/customeraddress/{id}")
+    public Address findAddressCustomerId(@PathVariable(name = "id") int id) {
+        return this.addressService.find(id);
+    }
+
     @DeleteMapping("/id/{id}")
     public int deleteAddress(@PathVariable(name = "id") int id) {
         return this.addressService.delete(id);
 
     }
 
-    @GetMapping
-    public List<Address> findAllAddress() {
-        return this.addressService.findAll();
-    }
-    @PostMapping("/update")
+    @PutMapping ("/update")
     public String updateAddress(@RequestBody Address address) {
         this.addressService.update(address);
         return "Endereço alterado com sucesso!";

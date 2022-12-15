@@ -2,6 +2,8 @@ package com.produto.service;
 
 
 import com.produto.dao.RequestDAO;
+import com.produto.domain.Address;
+import com.produto.domain.Customer;
 import com.produto.domain.Product;
 import com.produto.domain.Request;
 import com.produto.dto.ProductDetailsDto;
@@ -21,9 +23,17 @@ public class RequestService {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private AddressService addressService;
+
+    @Autowired
+    private  CustomerService customerService;
+
+
     public void createRequest(final RequestDetailsDto requestDetailsDto) {
 
         List<Product> productList = new ArrayList<>();
+
 
         for (ProductDetailsDto productDetailsDto : requestDetailsDto.getProducts()) {
             Product product = productService.find(productDetailsDto.getId());
@@ -31,10 +41,16 @@ public class RequestService {
             productList.add(product);
 
         }
+            Address address = addressService.find(requestDetailsDto.getAddress().getId());
+
+
+            Customer customer = customerService.find(requestDetailsDto.getCustomer().getId());
+
+
 
         final var totalPrice = productList.stream().mapToLong(Product::getPrice).sum();
 
-        Request request = new Request(requestDetailsDto, totalPrice, productList);
+        Request request = new Request(requestDetailsDto, totalPrice, productList, address, customer);
 
         this.requestDAO.save(request);
 
@@ -52,8 +68,6 @@ public class RequestService {
         return this.requestDAO.find(id);
     }
 
-    public List<Request> findAll() {
-        return this.requestDAO.findAll();
-    }
+    public List<Request> findAll() {return this.requestDAO.findAll();}
     
 }

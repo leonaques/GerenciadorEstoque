@@ -1,8 +1,6 @@
 package com.produto.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Customer {
 
     private int id;
@@ -13,13 +11,17 @@ public class Customer {
 
     private double cpf;
 
+
     public  Customer(int id, String name, String lastName, double cpf) {
         this.setId(id);
         this.setName(name);
         this.setLastName(lastName);
         this.setCpf(cpf);
     }
-    public Customer(){}
+
+    public Customer() {
+
+    }
 
 
     public int getId() {return id;}

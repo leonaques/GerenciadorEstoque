@@ -11,16 +11,22 @@ public class Request {
     private long price;
     private List<Product> products;
 
+    private Address addresses;
+
+    private Customer customers;
+
     public  Request(int requestId, String description, long price) {
         this.setId(requestId);
         this.setDescription(description);
         this.setPrice(price);
     }
 
-    public Request(RequestDetailsDto requestDetailsDto, long price, List<Product> productList) {
+    public Request(RequestDetailsDto requestDetailsDto, long price, List<Product> productList, Address addresses, Customer customers) {
         this.setDescription(requestDetailsDto.getDescription());
         this.setPrice(price);
         this.setProductsList(productList);
+        this.setAddresses(addresses);
+        this.setCustomers(customers);
     }
 
     public void setPrice(long price) {
@@ -55,4 +61,21 @@ public class Request {
     }
 
     public List<Product> getProducts() {return products;}
+
+    public Address getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(Address addresses) {
+        this.addresses = addresses;
+    }
+
+    public Customer getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(Customer customers) {
+        this.customers = customers;
+    }
+
 }

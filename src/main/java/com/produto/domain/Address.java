@@ -14,16 +14,28 @@ public class Address {
 
     private String country;
 
-    public Address(int id, int cep, String street, int number, String district, String country) {
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    private Customer customer;
+
+    public Address(int id, int cep, String street, int number, String district, String country, String customerName, String customerLastName) {
         this.setId(id);
         this.setCep(cep);
         this.setStreet(street);
         this.setNumber(number);
         this.setDistrict(district);
         this.setCountry(country);
+        this.customer.getName();
+        this.customer.getLastName();
     }
 
-    public Address (){}
+
 
     public int getId() {return id;}
 
