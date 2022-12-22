@@ -21,8 +21,8 @@ public class Request {
         this.setPrice(price);
     }
 
-    public Request(RequestDetailsDto requestDetailsDto, long price, List<Product> productList, Address addresses, Customer customers) {
-        this.setDescription(requestDetailsDto.getDescription());
+    public Request(String description, long price, List<Product> productList, Address addresses, Customer customers) {
+        this.setDescription(description);
         this.setPrice(price);
         this.setProductsList(productList);
         this.setAddresses(addresses);

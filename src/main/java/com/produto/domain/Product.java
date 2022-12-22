@@ -19,7 +19,10 @@ public class Product {
         this.setPrice(price);
     }
 
-    public Product(){}
+    public Product(String name, long price){
+        this.setName(name);
+        this.setPrice(price);
+    }
 
     public Product(int id, String name, String lastName, long cpf) {
     }

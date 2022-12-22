@@ -50,7 +50,7 @@ public class RequestService {
 
         final var totalPrice = productList.stream().mapToLong(Product::getPrice).sum();
 
-        Request request = new Request(requestDetailsDto, totalPrice, productList, address, customer);
+        Request request = new Request(requestDetailsDto.getDescription(), totalPrice, productList, address, customer);
 
         this.requestDAO.save(request);
 

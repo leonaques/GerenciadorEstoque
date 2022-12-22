@@ -31,8 +31,7 @@ public class Address {
         this.setNumber(number);
         this.setDistrict(district);
         this.setCountry(country);
-        this.customer.getName();
-        this.customer.getLastName();
+        this.setCustomer(new Customer(customerName, customerLastName));
     }
 
 

@@ -45,29 +45,26 @@ public class RequestDAO {
             this.jdbc.execute(sqlInsertProduct);
         }
 
-
-            String sqlInsertAddress = new StringBuilder()
-                    .append("INSERT INTO REQUEST_ADDRESS (REQUEST_ID, ADDRESS_ID) VALUES (")
-                    .append(id)
-                    .append(" , ")
-                    .append(request.getAddresses().getId())
-                    .append(")")
-                    .toString();
-
-
-            this.jdbc.execute(sqlInsertAddress);
+        String sqlInsertAddress = new StringBuilder()
+                .append("INSERT INTO REQUEST_ADDRESS (REQUEST_ID, ADDRESS_ID) VALUES (")
+                .append(id)
+                .append(" , ")
+                .append(request.getAddresses().getId())
+                .append(")")
+                .toString();
 
 
-            String sqlInsertCustomer = new StringBuilder()
-                    .append("INSERT INTO REQUEST_CUSTOMER (REQUEST_ID, CUSTOMER_ID) VALUES (")
-                    .append(id)
-                    .append(" , ")
-                    .append(request.getAddresses().getId())
-                    .append(")")
-                    .toString();
+        this.jdbc.execute(sqlInsertAddress);
 
-            this.jdbc.execute(sqlInsertCustomer);
+        String sqlInsertCustomer = new StringBuilder()
+                .append("INSERT INTO REQUEST_CUSTOMER (REQUEST_ID, CUSTOMER_ID) VALUES (")
+                .append(id)
+                .append(" , ")
+                .append(request.getAddresses().getId())
+                .append(")")
+                .toString();
 
+        this.jdbc.execute(sqlInsertCustomer);
 
         return request;
     }

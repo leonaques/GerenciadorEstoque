@@ -1,0 +1,73 @@
+create table ADDRESS(
+	ADDRESS_ID SERIAL primary key,
+	CEP NUMERIC(8, 0),
+	STREET VARCHAR(100),
+	NUMBER NUMERIC(10, 0),
+	DISTRICT VARCHAR(100),
+	COUNTRY VARCHAR (100)
+);
+
+CREATE TABLE REQUEST (
+    request_id INT PRIMARY KEY AUTO_INCREMENT,
+    description varchar(50) NULL,
+    price numeric(12) NULL,
+    CONSTRAINT request_pkey PRIMARY KEY (request_id)
+);
+
+create table CUSTOMER (
+	CUSTOMER_ID SERIAL primary key,
+	NAME VARCHAR(50),
+	LAST_NAME VARCHAR(100),
+	CPF NUMERIC(11, 0)
+);
+
+create table CUSTOMER_ADDRESS (
+    CUSTOMER_ID INT,
+    ADDRESS_ID INT,
+    CONSTRAINT FK_CUSTOMER_ADDRESS
+      FOREIGN KEY(CUSTOMER_ID)
+      REFERENCES CUSTOMER(CUSTOMER_ID),
+    CONSTRAINT FK_ADDRESS_CUSTOMER
+      FOREIGN KEY(ADDRESS_ID)
+      REFERENCES ADDRESS(ADDRESS_ID)
+ );
+
+ CREATE TABLE PRODUCT (
+ 	PRODUCT_ID SERIAL PRIMARY KEY,
+ 	NAME VARCHAR ( 50 ),
+ 	PRICE NUMERIC(12,0)
+ );
+
+ create table product_request(
+ 	request_id int,
+ 	product_id int,
+ 	quantity numeric(12,0),
+ 	constraint fk_product_request
+ 	foreign key(product_id)
+ 	references product(product_id),
+ 	constraint fk_request_product
+ 	foreign key(request_id)
+ 	references request(request_id)
+ 	);
+
+create table RESQUEST_ADDRESS (
+    REQUEST_ID INT,
+    ADDRESS_ID INT,
+    CONSTRAINT FK_REQUEST_ADDRESS
+      FOREIGN KEY(REQUEST_ID)
+      REFERENCES REQUEST(REQUEST_ID),
+    CONSTRAINT FK_ADDRESS_REQUEST
+      FOREIGN KEY(ADDRESS_ID)
+      REFERENCES ADDRESS(ADDRESS_ID)
+ );
+
+ create table REQUEST_CUSTOMER (
+     CUSTOMER_ID INT,
+     REQUEST_ID INT,
+     CONSTRAINT FK_CUSTOMER_REQUEST
+       FOREIGN KEY(CUSTOMER_ID)
+       REFERENCES CUSTOMER(CUSTOMER_ID),
+     CONSTRAINT FK_REQUEST_CUSTOME
+       FOREIGN KEY(REQUEST_ID)
+       REFERENCES REQUEST(REQUEST_ID)
+  );

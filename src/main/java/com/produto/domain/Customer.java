@@ -19,8 +19,9 @@ public class Customer {
         this.setCpf(cpf);
     }
 
-    public Customer() {
-
+    public Customer(String name, String lastName) {
+        this.setName(name);
+        this.setLastName(lastName);
     }
 
 
